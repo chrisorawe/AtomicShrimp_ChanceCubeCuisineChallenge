@@ -33,7 +33,7 @@ def main():
 
                 else:
 
-                    choiceList.append("Error: Required Choice Count ({0}) > Choices ({1})".format(requiredChoiceCount, len(fileContentList), ))
+                    choiceList.append("Error: Required Choice Count ({0}) > Choices ({1})".format(requiredChoiceCount, len(fileContentList)))
 
             else:
 
