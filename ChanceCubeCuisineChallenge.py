@@ -3,37 +3,44 @@ import random
 
 def main():
 
-	for file in os.listdir('.'):
+    for file in os.listdir('.'):
 
-		filename, fileExtension = os.path.splitext(file)
+        filename, fileExtension = os.path.splitext(file)
 
-		if fileExtension == '.txt':
+        if fileExtension == '.txt':
 
-			with open(file) as f:
-				fileContentList = f.readlines()
+            with open(file) as f:
 
-			firstListItem = fileContentList[0].strip('\n')
+                fileContentList = f.readlines()
 
-			choiceList = []
+            firstListItem = fileContentList[0].strip('\n')
 
-			if firstListItem.isdigit():
+            choiceList = []
 
-				requiredChoiceCount = int(firstListItem)
+            if firstListItem.isdigit():
 
-				while len(choiceList) < requiredChoiceCount:
+                requiredChoiceCount = int(firstListItem)
 
-					randomChoice = random.choices(fileContentList)[0].strip('\n')
+                if requiredChoiceCount <= len(fileContentList):
 
-					if randomChoice != firstListItem and randomChoice not in choiceList:
+                    while len(choiceList) < requiredChoiceCount:
 
-						choiceList.append(randomChoice)
-	
-			else:
+                        randomChoice = random.choices(fileContentList)[0].strip('\n')
 
-				choiceList.append(random.choices(fileContentList)[0].strip('\n'))
+                        if randomChoice != firstListItem and randomChoice not in choiceList:
 
-			print("{0}: {1}".format(filename, ', '.join(choiceList)))
+                            choiceList.append(randomChoice)
+
+                else:
+
+                    choiceList.append("Error: Required Choice Count ({0}) > Choices ({1})".format(requiredChoiceCount, len(fileContentList), ))
+
+            else:
+
+                choiceList.append(random.choices(fileContentList)[0].strip('\n'))
+
+            print("{0}: {1}".format(filename, ', '.join(choiceList)))
 
 if __name__ == "__main__":
 
-	main()
+    main()
